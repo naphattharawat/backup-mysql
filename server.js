@@ -35,7 +35,6 @@ cron.schedule('* 23 * * *', function () {
             let fileName = r.dbName + '.sql'
             let filepath = path.join(dirBackup, fileName);
             if (!shelljs.which('mysqldump')) {
-                res.send({ ok: false, error: 'Sorry, this script requires mysqldump' });
                 shelljs.echo('Sorry, this script requires mysqldump');
                 shelljs.exit(1);
             } else {
