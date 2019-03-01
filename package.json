@@ -1,0 +1,30 @@
+{
+  "name": "autobackup-db",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "dependencies": {
+    "fs": "0.0.1-security",
+    "fs-extra": "^7.0.1",
+    "moment": "^2.24.0",
+    "mysqldump": "^2.2.1",
+    "node-cron": "^2.0.3",
+    "path": "^0.12.7",
+    "shelljs": "^0.8.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/naphattharawat/autobackup-db.git"
+  },
+  "author": "naphattharawat",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/naphattharawat/autobackup-db/issues"
+  },
+  "homepage": "https://github.com/naphattharawat/autobackup-db#readme"
+}
