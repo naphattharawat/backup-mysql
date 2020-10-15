@@ -18,38 +18,34 @@ async function getConnection() {
     }
 }
 
+let dir = './backup';
+fse.ensureDirSync(dir)
+let dirBackup = path.join(dir, moment().format('YYYY_MM_DD'));
+fse.ensureDirSync(dirBackup)
+// fse.ensureDir(dir, err => {
+getConnection().then((result) => {
+    console.log('start backup');
+    for (const r of result) {
 
-
-
-cron.schedule('* 23 * * *', function () {
-    // วิ นาที ชมโมง วัน เดือน วันใน7วัน
-    let dir = './backup';
-    fse.ensureDirSync(dir)
-    let dirBackup = path.join(dir, moment().format('YYYY_MM_DD'));
-    fse.ensureDirSync(dirBackup)
-    // fse.ensureDir(dir, err => {
-    getConnection().then((result) => {
-        console.log('start backup');
-        for (const r of result) {
-
-            let fileName = r.dbName + '.sql'
-            let filepath = path.join(dirBackup, fileName);
-            if (!shelljs.which('mysqldump')) {
-                shelljs.echo('Sorry, this script requires mysqldump');
-                shelljs.exit(1);
-            } else {
-                shelljs.echo(`Ok starting backup ${r.dbName}`);
-                let cmd = `mysqldump --host=${r.dbHost} --port=3306 --add-drop-table ${r.dbName} --user=${r.dbUser} --password=${r.dbPassword} > ${filepath} `
-                shelljs.exec(cmd, async (code, stdout, stderr) => {
-                    if (code !== 0) {
-                        shelljs.echo(`${dirBackup} - error ${r.dbName}`);
-                    } else {
-                        shelljs.echo(`${dirBackup}- Success ${r.dbName}`);
-                    }
-                });
-            }
+        let fileName = r.dbSaveName + '.sql'
+        let filepath = path.join(dirBackup, fileName);
+        if (!shelljs.which('mysqldump')) {
+            shelljs.echo('Sorry, this script requires mysqldump');
+            shelljs.exit(1);
+        } else {
+            shelljs.echo(`Ok starting backup ${r.dbSaveName}`);
+            let cmd = `mysqldump --host=${r.dbHost} --port=3306 --add-drop-table ${r.dbName} --user=${r.dbUser} --password=${r.dbPassword} > ${filepath} `
+            shelljs.exec(cmd, async (code, stdout, stderr) => {
+                if (code !== 0) {
+                    shelljs.echo(`${dirBackup} - error ${r.dbSaveName}`);
+                } else {
+                    shelljs.echo(`${dirBackup}- Success ${r.dbSaveName}`);
+                }
+            });
         }
-        console.log('Success backup');
+    }
+    console.log('Success backup');
 
-    });
 });
+
+

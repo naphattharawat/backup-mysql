@@ -3,6 +3,7 @@
         "dbHost": "localhost",
         "dbUser": "root",
         "dbPassword": "12345678",
-        "dbName": "sys"
+        "dbName": "sys",
+        "dbSaveName":""
     }
 ]
