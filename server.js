@@ -21,9 +21,9 @@ async function getConnection() {
 async function backup() {
     try {
 
-        let dirBackup = './backup';
+        let dir = './backup';
         fse.ensureDirSync(dir)
-        // let dirBackup = path.join(dir, moment().format('YYYY_MM_DD'));
+        let dirBackup = path.join(dir, moment().format('YYYY_MM_DD'));
         fse.ensureDirSync(dirBackup)
         // fse.ensureDir(dir, err => {
         getConnection().then((result) => {
