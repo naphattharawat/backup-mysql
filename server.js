@@ -26,8 +26,12 @@ fse.ensureDirSync(dirBackup)
 getConnection().then((result) => {
     console.log('start backup');
     for (const r of result) {
-
-        let fileName = r.dbSaveName + '.sql'
+        let fileName = '';
+        if (r.dbSaveName.length) {
+             fileName = r.dbSaveName + '.sql'
+        } else {
+            fileName = r.dbName + '.sql'
+        }
         let filepath = path.join(dirBackup, fileName);
         if (!shelljs.which('mysqldump')) {
             shelljs.echo('Sorry, this script requires mysqldump');
